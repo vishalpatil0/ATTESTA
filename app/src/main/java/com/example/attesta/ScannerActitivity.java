@@ -1,14 +1,19 @@
 package com.example.attesta;
 
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -20,6 +25,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
@@ -117,13 +123,28 @@ public class ScannerActitivity extends AppCompatActivity {
             @Override
             public void onSuccess(@NonNull  Text text) {
                 StringBuilder result= new StringBuilder();
+                for(Text.TextBlock block:text.getTextBlocks()){
+                    String blockText=block.getText();
+                    Point[] blockCornerPoint=block.getCornerPoints();
+                    Rect blockFrame = block.getBoundingBox();
+                    for(Text.Line line:block.getLines()){
+                        String lineTExt=line.getText();
+                        Point[] lineCornerPoint = line.getCornerPoints();
+                        Rect linRect = line.getBoundingBox();
+                        for(Text.Element element: line.getElements()){
+                            String elementText = element.getText();
+                            result.append(elementText);
+                        }
+                        resultTV.setText(blockText);
+                    }
+                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onFailure(@NonNull @org.jetbrains.annotations.NotNull Exception e) {
-                Toast.makeText(ScannerActitivit.this)
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(ScannerActitivity.this,"Fail to detect text from image.."+e.getMessage(),Toast.LENGTH_SHORT).show();
             }
-        })
+        });
 
     }
 }
