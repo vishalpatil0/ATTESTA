@@ -1,14 +1,11 @@
 package com.example.attesta;
 
-import androidx.activity.result.contract.ActivityResultContract;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -20,7 +17,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.Manifest.permission;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -35,7 +31,7 @@ import com.google.mlkit.vision.text.TextRecognizerOptions;
 import static android.Manifest.permission.CAMERA;
 
 
-public class ScannerActitivity extends AppCompatActivity {
+public class ScannerActivity extends AppCompatActivity {
 
     private ImageView captureIV;
     private TextView resultTV;
@@ -46,7 +42,8 @@ public class ScannerActitivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scanner_actitivity);
+        setContentView(R.layout.activity_scanner_activity);
+        captureIV=findViewById(R.id.idIVCaptureImage);
         resultTV = findViewById(R.id.idTVDetectedText);
         snapBtn = findViewById(R.id.idBtnSnap);
         detectBtn = findViewById(R.id.idBtnDetect);
@@ -91,7 +88,7 @@ public class ScannerActitivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull  String[] permissions, @NonNull  int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, @NonNull  int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(grantResults.length>0){
             boolean cameraPermission = grantResults[0] == PackageManager.PERMISSION_GRANTED;
@@ -107,9 +104,9 @@ public class ScannerActitivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode,Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==REQUEST_IMAGE_CAPTURE && requestCode==RESULT_OK){
+        if(requestCode==REQUEST_IMAGE_CAPTURE && resultCode ==RESULT_OK){
             Bundle extras= data.getExtras();
             imageBitmap=(Bitmap) extras.get("data");
             captureIV.setImageBitmap(imageBitmap);
@@ -142,7 +139,7 @@ public class ScannerActitivity extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(ScannerActitivity.this,"Fail to detect text from image.."+e.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScannerActivity.this,"Fail to detect text from image.."+e.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         captureBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(MainActivity.this, ScannerActitivity.class);
+                Intent i=new Intent(MainActivity.this, ScannerActivity.class);
                 startActivity(i);
 
             }

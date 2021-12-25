@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black_shade_1"
-    tools:context=".ScannerActitivity">
+    tools:context=".ScannerActivity">
 
     <ImageView
         android:id="@+id/idIVCaptureImage"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:src="@drawable/scanner" />
 
     <TextView
@@ -57,7 +57,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="26dp"
-        android:layout_marginTop="47dp"
+        android:layout_marginTop="38dp"
         android:layout_marginEnd="22dp"
         android:layout_marginBottom="122dp"
         android:background="@drawable/button_back"
