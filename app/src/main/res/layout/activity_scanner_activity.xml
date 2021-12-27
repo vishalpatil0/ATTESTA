@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,8 +12,13 @@
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/scanner" />
+        android:src="@drawable/scanner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.062" />
 
     <TextView
         android:id="@+id/idTVDetectedText"
@@ -22,16 +27,18 @@
         android:layout_below="@id/idIVCaptureImage"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="31dp"
         android:gravity="center"
         android:padding="4dp"
         android:text="Your result will appear here"
         android:textAlignment="center"
         android:textColor="@color/yellow"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.477" />
 
     <Button
         android:id="@+id/idBtnSnap"
@@ -40,29 +47,51 @@
         android:layout_below="@+id/idTVDetectedText"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginEnd="23dp"
         android:background="@drawable/button_back"
         android:text="Snap"
         android:textAllCaps="false"
-        app:backgroundTint="@color/yellow" />
+        app:backgroundTint="@color/yellow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.606" />
 
     <Button
-        android:id="@+id/idBtnDetect"
-        android:layout_width="wrap_content"
+        android:id="@+id/idBtnClip"
+        android:layout_width="359dp"
         android:layout_height="58dp"
         android:layout_below="@+id/idBtnSnap"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="122dp"
+        android:background="@drawable/button_back"
+        android:text="Copy to clipboard"
+        android:textAllCaps="false"
+        app:backgroundTint="@color/yellow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idBtnDetect"
+        app:layout_constraintVertical_bias="0.313" />
+
+    <Button
+        android:id="@+id/idBtnDetect"
+        android:layout_width="359dp"
+        android:layout_height="58dp"
+        android:layout_below="@+id/idBtnSnap"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="152dp"
         android:background="@drawable/button_back"
         android:text="Detect"
         android:textAllCaps="false"
-        app:backgroundTint="@color/yellow" />
+        app:backgroundTint="@color/yellow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idBtnSnap"
+        app:layout_constraintVertical_bias="0.563" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

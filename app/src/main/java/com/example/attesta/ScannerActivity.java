@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -27,7 +28,7 @@ import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.TextRecognizerOptions;
-
+import android.content.ClipboardManager;
 import static android.Manifest.permission.CAMERA;
 
 
@@ -35,7 +36,7 @@ public class ScannerActivity extends AppCompatActivity {
 
     private ImageView captureIV;
     private TextView resultTV;
-    private Button snapBtn,detectBtn;
+    private Button snapBtn,detectBtn,clipboardBtn;
     private Bitmap imageBitmap;
     static final int REQUEST_IMAGE_CAPTURE=1;
 
@@ -47,12 +48,23 @@ public class ScannerActivity extends AppCompatActivity {
         resultTV = findViewById(R.id.idTVDetectedText);
         snapBtn = findViewById(R.id.idBtnSnap);
         detectBtn = findViewById(R.id.idBtnDetect);
-
+        clipboardBtn = findViewById(R.id.idBtnClip);
         detectBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v){
                 detectText();
+            }
+        });
+        clipboardBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String data=String.valueOf(resultTV.getText());
+                ClipboardManager clipboard;
+                clipboard=(ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("text", data);
+                clipboard.setPrimaryClip(clip);
+                Toast.makeText(ScannerActivity.this,"Successfully copied...",Toast.LENGTH_SHORT).show();
             }
         });
         snapBtn.setOnClickListener(new View.OnClickListener()
@@ -69,6 +81,7 @@ public class ScannerActivity extends AppCompatActivity {
             }
         });
     }
+
     private boolean checkPermissions(){
         int cameraPermission = ContextCompat.checkSelfPermission(getApplicationContext(),CAMERA);
         return cameraPermission== PackageManager.PERMISSION_GRANTED;
