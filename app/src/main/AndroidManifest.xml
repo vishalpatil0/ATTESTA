@@ -12,7 +12,10 @@
         android:roundIcon="@drawable/scanner"
         android:supportsRtl="true"
         android:theme="@style/Theme.Attesta">
-        <activity android:name=".ScannerActivity"></activity>
+        <activity
+            android:name=".ScrollText"
+            android:exported="true" />
+        <activity android:name=".ScannerActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
